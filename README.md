@@ -6,11 +6,11 @@ This repository contains all of the code and labs for COMP350: Advanced Programm
 
 The course is structured as follows:
 
-## Part I: Introduction to git
+## [Part I: Introduction to git](Part_I_Introduction_to_git)
 
-## Part II:Introduction to Python
+## [Part II:Introduction to Python](Part_II_introduction_to_Python)
 
-## Part III: Beyond the basics
+## [Part III: Beyond the basics](Part_III_Beyond_the_basics)
 
-## Part IV: Advanced topics
+## [Part IV: Advanced topics](Part_IV_Advanced_topics)
 
