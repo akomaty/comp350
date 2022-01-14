@@ -1,0 +1,148 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% vim: set fileencoding=utf-8 :                %
+% Author: Andre Anjos <andre.anjos@idiap.ch>   %
+% Last update: Tue 16 Jun 2015 13:26:12 CEST   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{beamer}
+
+% Define here the theme and color. For a matrix display on possibilities,
+% please visit: http://www.hartwork.org/beamer-theme-matrix/
+\usetheme{default}
+\usecolortheme{rose}
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{navigation symbols}{}
+
+% Set the footer
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\vspace*{-0.2em}\hspace*{0.5em}\insertauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\vspace*{-0.2em}\insertshortdate{}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\vspace*{-0.2em}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+
+% Set the itemization and enumeration styles
+\setbeamertemplate{itemize items}[default]
+\setbeamertemplate{enumerate items}[default]
+
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{movie15}
+\usepackage{comment}
+\usepackage{minted} % for syntax highlighting on code listings
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{listings}
+
+% Paths for figures outside './figures'
+\graphicspath{{parts/beat/slides/images/}}
+
+% For drawing
+\usetikzlibrary{arrows,shapes,positioning,shadows,trees,fit}
+
+% For TikZ overlays
+\tikzset{onslide/.code args={<#1>#2}{%
+  \only<#1>{\pgfkeysalso{#2}} % \pgfkeysalso doesn't change the path
+}}
+
+% Define colors and environments for minted
+\definecolor{shellbg}{rgb}{1.0,1.0,0.7}
+\definecolor{darkgray}{rgb}{0.1,0.1,0.4}
+\definecolor{darkgreen}{rgb}{0.2,0.6,0.2}
+
+\newminted{sh}{bgcolor=shellbg,fontsize=\footnotesize,frame=single,framerule=0pt,gobble=6}
+\newminted{python}{bgcolor=shellbg,fontsize=\scriptsize,frame=single,framerule=0pt,gobble=6}
+\newminted{rst}{bgcolor=shellbg,fontsize=\scriptsize,frame=single,framerule=0pt,gobble=6}
+\newminted{ini}{bgcolor=shellbg,fontsize=\scriptsize,frame=single,framerule=0pt,gobble=6,linenos=true}
+\newminted{text}{fontsize=\scriptsize,frame=single,framerule=0pt,gobble=6}
+\newminted{json}{bgcolor=shellbg,fontsize=\scriptsize,frame=single,framerule=0pt,gobble=6}
+
+% The color of links
+%\hypersetup{colorlinks=true,linkcolor=green}
+\hypersetup{colorlinks=true}
+
+\AtBeginSubsection[]
+{
+   \begin{frame}
+       \frametitle{Outline}
+       \tableofcontents[currentsection,currentsubsection]
+   \end{frame}
+}
+
+\lstdefinestyle{customPy}{
+  backgroundcolor=\color{yellow!20},
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=l,
+  escapechar=,
+  xleftmargin=\parindent,
+  language=Python,
+  showstringspaces=false,
+  basicstyle=\scriptsize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
+% Command             10pt    11pt    12pt
+% \tiny               5       6       6
+% \scriptsize         7       8       8
+% \footnotesize       8       9       10
+% \small              9       10      10.95
+% \normalsize         10      10.95   12
+% \large              12      12      14.4
+% \Large              14.4    14.4    17.28
+% \LARGE              17.28   17.28   20.74
+% \huge               20.74   20.74   24.88
+% \Huge               24.88   24.88   24.88
+\lstdefinestyle{customBash}{
+  backgroundcolor=\color{black!90},
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=l,
+  escapechar=,
+  xleftmargin=\parindent,
+  language=Bash,
+  showstringspaces=false,
+  basicstyle=\small\ttfamily\color{white},
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  %identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
+
+\newcommand{\includecode}[2][c]{\lstinputlisting[style=customPy]{#2}}
+\newcommand{\includebash}[2][c]{\lstinputlisting[style=customBash]{#2}}
+
+% The display order is: title, institute, date
+\title{Introduction to Git}
+\author{\textbf{Ali Komaty}\href{mailto:akomaty@gmail.com}{$<$akomaty@gmail.com$>$}}
+\date{\textit{\today}}
+
+% Control here what to compile
+%\includeonly{parts/title}
+
+\begin{document}
+  \frame{\titlepage} % fancy title page
+  \frame{\frametitle{Outline}\tableofcontents}
+	\include{getting_started}
+  \include{git-basics}
+  \include{branches}
+  \include{more_git}
+\end{document}
